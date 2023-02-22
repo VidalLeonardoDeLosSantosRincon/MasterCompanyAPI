@@ -22,7 +22,7 @@ namespace MasterCompanyAPI.Models
         public double Salary { get; set; }
         public string? Gender { get; set; }
         public string? Position { get; set; }
-        public DateOnly StartDate { get; set; }
+        public string? StartDate { get; set; }
         public int Status { get; set; }
     }
 }
