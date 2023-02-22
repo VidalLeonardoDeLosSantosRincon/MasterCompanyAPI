@@ -1,8 +1,11 @@
-﻿namespace MasterCompanyAPI.Database
+﻿using MasterCompanyAPI.Models;
+
+namespace MasterCompanyAPI.Database
 {
-    public class Context
+    public class Context<E>
+        where E : Employee
     {  
-        private List<object> Results { get; set; }
+        private List<E> Results { get; set; }
 
         public Context(string? filename, string? extension)
         {
