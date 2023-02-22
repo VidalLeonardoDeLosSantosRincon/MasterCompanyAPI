@@ -5,8 +5,8 @@
 		"Document": "22500210203",
 		"Salary": 125000,
 		"Gender": "M",
-		"Position": "TI Manager&quot",
-		"StartDate: "2010-05-20",
+		"Position": "TI Manager",
+		"StartDate": "2010-05-20",
 		"Status": 1
 	},
 	{
