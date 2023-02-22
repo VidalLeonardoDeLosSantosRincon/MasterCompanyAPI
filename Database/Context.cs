@@ -86,5 +86,28 @@ namespace MasterCompanyAPI.Database
             if (json == null) return null;
             return JsonConvert.DeserializeObject<E>(json.ToString());
         }
+
+        /// <summary>
+        ///     Convert <see langword="param"/> 
+        ///     <see cref="JArray"/> <paramref name="json"></paramref>
+        ///     into a <see cref="List{E}"/> of type <see cref="E"/>.
+        ///     <para>Uses:
+        ///         <code>- <see cref="JsonConvert.DeserializeObject"/></code>    
+        ///     </para>
+        /// </summary>
+        /// <param name="json">
+        ///     A <see langword="JSON"/> 
+        ///     <see langword="array"/> (<see cref="JArray"/>).
+        /// </param>
+        /// <returns>
+        ///     <see langword="null"/> if <see langword="param"/> 
+        ///     <paramref name="json"></paramref> is <see langword="null"/>,
+        ///     otherwise a <see cref="List{E}"/> of type <see cref="E"/>.
+        /// </returns>
+        public List<E>? JsonToModelList(JArray json)
+        {
+            if (json == null) return new();
+            return JsonConvert.DeserializeObject<List<E>>(json.ToString());
+        }
     }
 }
