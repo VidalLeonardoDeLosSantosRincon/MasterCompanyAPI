@@ -48,5 +48,18 @@
             Context.FilePath = string.Format(@"{0}\{1}{2}", Context.BasePath, file_name, file_extension);
             return true;
         }
+
+        /// <summary>
+        /// Checks if <paramref name="filepath"></paramref> exists and it's a valid path.
+        /// </summary>
+        /// <param name="filepath">Specify the path of the file</param>
+        /// <returns>
+        /// <see langword="true"/> if the <paramref name="filepath"></paramref> exists and it's a valid path, 
+        /// otherwise <see langword="false"/>.
+        /// </returns>
+        public bool ValidateFile(string? filepath)
+        {
+            return (filepath != null) && File.Exists(filepath);
+        }
     }
 }
