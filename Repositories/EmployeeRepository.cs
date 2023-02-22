@@ -29,5 +29,24 @@ namespace MasterCompanyAPI.Repositories
             List<Employee> employees = await employeeDao.GetAll();
             return employees;
         }
+
+        /// <summary>
+        ///     <c><see langword="async"/> method </c>
+        ///     <para>
+        ///         Returns a list of employees(no duplicated) 
+        ///     </para>
+        ///     <para>Uses:
+        ///         <code>- <see cref="EmployeeRepository.GetEmployees"/></code>
+        ///     </para>
+        /// </summary>
+        /// <returns>
+        ///     <see cref="List{E}"/> of type <see cref="Employee"/>
+        /// </returns>
+        public async Task<List<Employee>> GetNoDuplicatedEmployees()
+        {
+            List<Employee> employees = await this.GetEmployees();
+            employees = employees.GroupBy(x => x.Document).Select(x => x.First()).ToList();
+            return employees;
+        }
     }
 }
