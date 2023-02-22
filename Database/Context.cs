@@ -1,5 +1,6 @@
 ﻿using MasterCompanyAPI.Models;
 using MasterCompanyAPI.Utils;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace MasterCompanyAPI.Database
@@ -61,6 +62,29 @@ namespace MasterCompanyAPI.Database
         public async Task<JArray> JsonArray()
         {
             return JArray.Parse(await this.GetContent());
+        }
+
+        /// <summary>
+        ///     Convert <see langword="param"/> 
+        ///     <see cref="JObject"/> <paramref name="json"></paramref>
+        ///     into a <see langword="object"/> of type <see cref="E"/>.
+        ///     <para>Uses: 
+        ///         <code>- <see cref="JsonConvert.DeserializeObject"/></code>
+        ///     </para>
+        /// </summary>
+        /// <param name="json">
+        ///     A <see langword="JSON"/> 
+        ///     <see langword="object"/> (<see cref="JObject"/>).
+        /// </param>
+        /// <returns>
+        ///     <see langword="null"/> if <see langword="param"/> 
+        ///     <paramref name="json"></paramref> is <see langword="null"/>,
+        ///     otherwise a <see langword="object"/> of type <see cref="E"/> .
+        /// </returns>
+        public E? JsonToModel(JObject json)
+        {
+            if (json == null) return null;
+            return JsonConvert.DeserializeObject<E>(json.ToString());
         }
     }
 }
