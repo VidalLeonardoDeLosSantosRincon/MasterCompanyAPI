@@ -46,5 +46,21 @@ namespace MasterCompanyAPI.Database
         {
             return JObject.Parse(await this.GetContent());
         }
+
+        /// <summary>
+        ///     <c><see langword="async"/> method </c>
+        ///     <para>Uses:
+        ///         <code>- <see cref="GetContent"/></code>
+        ///         <code>- <see cref="JArray.Parse"/></code>
+        ///     </para>
+        /// </summary>
+        /// <returns>
+        ///     A <see langword="JSON"/> 
+        ///     <see langword="array"/> (<see cref="JArray"/>)
+        /// </returns>
+        public async Task<JArray> JsonArray()
+        {
+            return JArray.Parse(await this.GetContent());
+        }
     }
 }
