@@ -1,4 +1,4 @@
-﻿namespace MasterCompanyAPI.Database
+﻿namespace MasterCompanyAPI.Utils
 {
     public class DataFile
     {
