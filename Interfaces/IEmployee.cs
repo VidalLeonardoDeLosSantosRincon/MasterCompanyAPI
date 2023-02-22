@@ -61,10 +61,10 @@ namespace MasterCompanyAPI.Interfaces
         public string? Position { get; set; }
 
         /// <summary>
-        /// <c><see cref="DateOnly"/> StartDate</c>, 
+        /// <c><see cref="string"/>? StartDate</c>, 
         /// represents the <see cref="Employee"/> StartDate
         /// </summary>
-        public DateOnly StartDate { get; set; }
+        public string? StartDate { get; set; }
 
         /// <summary>
         /// <c><see langword="int"/> Status</c>, 
