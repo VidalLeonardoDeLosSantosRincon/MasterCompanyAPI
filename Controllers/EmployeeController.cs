@@ -29,6 +29,15 @@ namespace MasterCompanyAPI.Controllers
             return new JsonResult(new { data });
         }
 
+        [Route("no-duplicated")]
+        [HttpGet, ActionName("GetNoDuplicated")]
+        public async Task<JsonResult> GetNoDuplicated()
+        {
+            List<Employee> employees = await employeeRepo.GetNoDuplicatedEmployees();
+            var data = new { total = employees.Count, employees };
+            return new JsonResult(new { data });
+        }
+
         [Route("add")]
         [HttpPost, ActionName("Post")]
         public async Task<JsonResult> Post(int? id)
