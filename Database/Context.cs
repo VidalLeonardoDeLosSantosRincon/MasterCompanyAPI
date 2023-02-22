@@ -15,6 +15,17 @@
         }
 
         /// <summary>
+        /// Returns the current file path.
+        /// </summary>
+        /// <returns>
+        /// <see langword="string"/>? <see cref="Context.FilePath"/>.
+        /// </returns>
+        public string? GetPath()
+        {
+            return Context.FilePath;
+        }
+
+        /// <summary>
         /// Set the current file path.
         /// </summary>
         /// <param name="file_name">Specify the file name (without extension)</param>
