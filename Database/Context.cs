@@ -81,7 +81,7 @@
                 {"\n", ""},
                 {"\t", ""},
                 {"[", ""},
-                {"]", "" }
+                {"]", ""}
             };
 
             foreach (string _symbol in _symbols.Keys)
@@ -90,6 +90,39 @@
             }
 
             return text;
+        }
+
+        /// <summary>
+        /// <c><see langword="async"/> method </c>
+        /// </summary>
+        /// <returns>
+        /// the text (<see langword="string"/>) read from the file 
+        /// (<see langword="txt"/>, <see langword="json"/>)
+        /// </returns>
+        public async Task<string> ReadDataFile()
+        {
+            string path = this.GetPath() ?? "";
+            string result = "[]";
+
+            if (path != "" && ValidateFile(path))
+            {
+                string text = await File.ReadAllTextAsync(path);
+                text = Context.ReplaceSymbols(text);
+
+                string[] lines = text.Split('{');
+                result = "";
+                int index = 1;
+
+                foreach (string line in lines)
+                {
+                    if (line.Trim() == "") continue;
+                    result += "{";
+                    result += string.Format("\n\"Id\": {0}, {1}", index, line);
+                    index++;
+                }
+                return string.Format("[{0}]", result);
+            }
+            return result;
         }
     }
 }
