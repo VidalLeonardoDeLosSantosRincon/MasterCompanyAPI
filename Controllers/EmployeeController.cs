@@ -24,9 +24,9 @@ namespace MasterCompanyAPI.Controllers
         [HttpGet, ActionName("Get")]
         public async Task<JsonResult> Get()
         {
-            employeeRepo.GetEmployees();
-            await Task.Delay(3000);
-            return new JsonResult(new { });
+            List<Employee> employees = await employeeRepo.GetEmployees();
+            var data = new { total = employees.Count, employees };
+            return new JsonResult(new { data });
         }
 
         [Route("add")]
