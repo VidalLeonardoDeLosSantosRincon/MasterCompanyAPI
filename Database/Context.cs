@@ -61,5 +61,35 @@
         {
             return (filepath != null) && File.Exists(filepath);
         }
+
+        /// <summary>
+        /// Replaces specified symbols from 
+        /// <paramref name="text"></paramref>
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>
+        /// <para>
+        /// If <paramref name="text" ></paramref>
+        /// contains any of the specified symbols, 
+        /// return <paramref name="text" ></paramref> with the symbols replaced,
+        /// </para>
+        /// otherwhise return <paramref name="text" ></paramref> without changes
+        /// </returns>
+        private static string ReplaceSymbols(string text)
+        {
+            Dictionary<string, string> _symbols = new() {
+                {"\n", ""},
+                {"\t", ""},
+                {"[", ""},
+                {"]", "" }
+            };
+
+            foreach (string _symbol in _symbols.Keys)
+            {
+                text = text.Replace(_symbol, _symbols[_symbol]);
+            }
+
+            return text;
+        }
     }
 }
