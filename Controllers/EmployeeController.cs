@@ -18,7 +18,7 @@ namespace MasterCompanyAPI.Controllers
 
         [Route("{document}")]
         [HttpGet, ActionName("Get")]
-        [SwaggerOperation(Summary = "- Get a employee by his/her document")]
+        [SwaggerOperation(Summary = "- Gets a employee by his/her document")]
         public async Task<JsonResult> Get(string? document)
         {
             Employee? employee = await employeeRepo.GetEmployeeByDocument(document);
@@ -28,7 +28,7 @@ namespace MasterCompanyAPI.Controllers
 
         [Route("salary-range/")]
         [HttpGet, ActionName("GetBySalaryRange")]
-        [SwaggerOperation(Summary = "- List employees by a salary range (from, to)")]
+        [SwaggerOperation(Summary = "- Gets employees by a salary range (from, to)")]
         public async Task<JsonResult> GetBySalaryRange([Required]double? from, [Required]double? to)
         {
             List<Employee>? employees = await employeeRepo.GetEmployeesBySalaryRange(from, to);
@@ -37,7 +37,7 @@ namespace MasterCompanyAPI.Controllers
         }
 
         [HttpGet, ActionName("Get")]
-        [SwaggerOperation(Summary = "- List all employees (duplicated, enabled, disabled)")]
+        [SwaggerOperation(Summary = "- Gets all employees (duplicated, enabled, disabled)")]
         public async Task<JsonResult> Get()
         {
             List<Employee> employees = await employeeRepo.GetEmployees();
@@ -47,7 +47,7 @@ namespace MasterCompanyAPI.Controllers
 
         [Route("no-duplicated")]
         [HttpGet, ActionName("GetNoDuplicated")]
-        [SwaggerOperation(Summary = "- List employees (no duplicated)")]
+        [SwaggerOperation(Summary = "- Gets employees (no duplicated)")]
         public async Task<JsonResult> GetNoDuplicated()
         {
             List<Employee> employees = await employeeRepo.GetNoDuplicatedEmployees();
@@ -57,7 +57,7 @@ namespace MasterCompanyAPI.Controllers
 
         [Route("add")]
         [HttpPost, ActionName("Post")]
-        [SwaggerOperation(Summary = "- Add an employees")]
+        [SwaggerOperation(Summary = "- Add an employee")]
         public async Task<JsonResult> Post([FromBody] Employee? employee)
         {
             var data = new { EmployeeAdded = await employeeRepo.AddEmployee(employee) };
