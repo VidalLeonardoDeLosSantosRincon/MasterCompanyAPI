@@ -24,7 +24,7 @@ namespace MasterCompanyAPI.Controllers
             return new JsonResult(new { data });
         }
 
-        [Route("salary_range/")]
+        [Route("salary-range/")]
         [HttpGet, ActionName("GetBySalaryRange")]
         public async Task<JsonResult> GetBySalaryRange([Required]double? from, [Required]double? to)
         {
