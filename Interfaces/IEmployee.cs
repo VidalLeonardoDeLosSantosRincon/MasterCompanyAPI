@@ -13,12 +13,6 @@ namespace MasterCompanyAPI.Interfaces
     public interface IEmployee
     {
         /// <summary>
-        /// <c><see langword="int"/> Id</c>, 
-        /// represents the <see cref="Employee"/> Id (Identifier)
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// <c><see langword="string"/>? Name</c>, 
         /// represents the <see cref="Employee"/> Name
         /// </summary>
@@ -65,19 +59,5 @@ namespace MasterCompanyAPI.Interfaces
         /// represents the <see cref="Employee"/> StartDate
         /// </summary>
         public string? StartDate { get; set; }
-
-        /// <summary>
-        /// <c><see langword="int"/> Status</c>, 
-        /// represents the <see cref="Employee"/> Status <c>(Range [0, 1])</c>
-        /// <para>
-        ///  If <c>Status</c> equals to <c><see langword="0"/></c>
-        ///  the employee is disabled
-        /// </para>
-        /// <para>
-        ///  If <c>Status</c> equals to <c><see langword="1"/></c>
-        ///  the employee is enabled
-        /// </para>
-        /// </summary>
-        public int Status { get; set; }
     }
 }
