@@ -6,7 +6,10 @@ var services = builder.Services;
 services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 services.AddEndpointsApiExplorer();
-services.AddSwaggerGen();
+services.AddSwaggerGen( options =>
+{
+    options.EnableAnnotations();
+});
 
 const string CORS_POLICY = "CORS_MD";
 services.AddCors(options =>
