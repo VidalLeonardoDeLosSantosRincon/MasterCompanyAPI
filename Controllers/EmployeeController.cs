@@ -52,10 +52,10 @@ namespace MasterCompanyAPI.Controllers
 
         [Route("add")]
         [HttpPost, ActionName("Post")]
-        public async Task<JsonResult> Post(int? id)
+        public async Task<JsonResult> Post([FromBody] Employee? employee)
         {
-            await Task.Delay(3000);
-            return new JsonResult(new { id });
+            var data = new { EmployeeAdded = await employeeRepo.AddEmployee(employee) };
+            return new JsonResult(new { data });
         }
 
         [Route("update")]
