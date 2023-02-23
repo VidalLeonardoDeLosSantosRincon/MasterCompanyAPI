@@ -1,4 +1,5 @@
 ﻿using MasterCompanyAPI.Interfaces;
+using MasterCompanyAPI.Models;
 
 namespace MasterCompanyAPI.DTOs
 {
@@ -30,5 +31,11 @@ namespace MasterCompanyAPI.DTOs
         /// </para>
         /// </summary>
         public int Status { get; set; }
+
+        /// <summary>
+        /// <c><see cref="SalaryIncrease"/> SalaryRaise</c>, 
+        /// represents the <see cref="Employee"/> salary increase
+        /// </summary>
+        public SalaryIncrease? SalaryRaise { get; set; }
     }
 }
