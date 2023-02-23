@@ -20,6 +20,24 @@ namespace MasterCompanyAPI.Database
         /// <summary>
         ///     <c><see langword="async"/> method </c>
         ///    <para>Uses:
+        ///         <code>- <see cref="DataFile.WriteFile"/></code>
+        ///     </para>
+        /// </summary>
+        ///  <param name="content">
+        ///     Represents the content that will be append to the file
+        /// </param>
+        /// <returns>
+        ///     <see langword="true"/> if content was append to the file successfully,
+        ///     otherwise <see langword="false"/>.
+        /// </returns>
+        public async Task<bool> AddContent(string? content)
+        {
+            return await dataFile.WriteFile(content);
+        }
+
+        /// <summary>
+        ///    <c><see langword="async"/> method </c>
+        ///    <para>Uses:
         ///         <code>- <see cref="DataFile.ReadFile"/></code>
         ///     </para>
         /// </summary>
