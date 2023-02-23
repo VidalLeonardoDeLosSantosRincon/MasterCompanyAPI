@@ -2,6 +2,7 @@
 using MasterCompanyAPI.Models;
 using MasterCompanyAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace MasterCompanyAPI.Controllers
 {
@@ -23,12 +24,11 @@ namespace MasterCompanyAPI.Controllers
             return new JsonResult(new { data });
         }
 
-
-        [Route("{from_salary:double},{to_salary:double}")]
-        [HttpGet, ActionName("Get")]
-        public async Task<JsonResult> Get(double? from_salary, double? to_salary)
+        [Route("salary_range/")]
+        [HttpGet, ActionName("GetBySalaryRange")]
+        public async Task<JsonResult> GetBySalaryRange([Required]double? from, [Required]double? to)
         {
-            List<Employee>? employees = await employeeRepo.GetEmployeesBySalaryRange(from_salary, to_salary);
+            List<Employee>? employees = await employeeRepo.GetEmployeesBySalaryRange(from, to);
             var data = new { total = employees.Count, employees };
             return new JsonResult(new { data });
         }
