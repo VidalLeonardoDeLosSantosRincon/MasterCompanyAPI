@@ -23,6 +23,16 @@ namespace MasterCompanyAPI.Controllers
             return new JsonResult(new { data });
         }
 
+
+        [Route("{from_salary:double},{to_salary:double}")]
+        [HttpGet, ActionName("Get")]
+        public async Task<JsonResult> Get(double? from_salary, double? to_salary)
+        {
+            List<Employee>? employees = await employeeRepo.GetEmployeesBySalaryRange(from_salary, to_salary);
+            var data = new { total = employees.Count, employees };
+            return new JsonResult(new { data });
+        }
+
         [HttpGet, ActionName("Get")]
         public async Task<JsonResult> Get()
         {
