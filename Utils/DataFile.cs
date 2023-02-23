@@ -124,5 +124,44 @@
             }
             return result;
         }
+
+        /// <summary>
+        ///     <c><see langword="async"/> method </c>
+        ///     <para>
+        ///         Append <see langword="param"/> <see langword="string"/>? <paramref name="content"/>
+        ///         to the file (<see langword=".txt"/>, <see langword=".json"/>)
+        ///     </para>
+        ///     <para>Uses:
+        ///        <code>- <see cref="File.WriteAllTextAsync"/></code>
+        ///     </para>
+        /// </summary>
+        /// <param name="content">
+        ///     Represents the content that will be append to the file
+        /// </param>
+        /// <returns>
+        ///     <see langword="true"/> if content was append to the file successfully,
+        ///     otherwise <see langword="false"/>.
+        /// </returns>
+        public async Task<bool> WriteFile(string? content)
+        {
+            string path = this.GetPath() ?? "";
+            bool result = false;
+
+            content = (content ?? "").Trim();
+            if (content.Equals("")) return false;
+
+            if (path != "" && ValidateFile(path))
+            {
+                try
+                {
+                    await File.WriteAllTextAsync(path, content);
+                    result = true;
+
+                } catch(Exception e) {
+                    throw new ApplicationException(e.Message);
+                }
+            }
+            return result;
+        }
     }
 }
