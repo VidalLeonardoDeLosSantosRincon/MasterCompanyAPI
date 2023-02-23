@@ -40,6 +40,15 @@ namespace MasterCompanyAPI.Controllers
             return new JsonResult(new { data });
         }
 
+        [Route("salary-raise")]
+        [HttpGet, ActionName("GetSalaryRaise")]
+        [SwaggerOperation(Summary = "- Gets employees with their Salary increases")]
+        public async Task<JsonResult> GetSalaryRaise()
+        {
+            var data = await employeeService.GetSalaryRaise();
+            return new JsonResult(new { data });
+        }
+
         [HttpGet, ActionName("Get")]
         [SwaggerOperation(Summary = "- Gets all employees (duplicated, enabled, disabled)")]
         public async Task<JsonResult> Get()
