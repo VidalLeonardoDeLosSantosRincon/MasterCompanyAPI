@@ -40,16 +40,22 @@ namespace MasterCompanyAPI.DAOs
 
         /// <summary>
         ///     <c><see langword="async"/> method </c>
-        ///     <para>
-        ///         Returns a list of employees(All) 
-        ///     </para>
         ///     <para>Uses:
+        ///         <code>- <see cref="Context{E}.AddContent"/></code>
         ///         <code>- <see cref="Context{E}.JsonArray"/></code>
         ///         <code>- <see cref="Context{E}.JsonToModelList"/></code>
+        ///         <code>- <see cref="JsonSerializer.Serialize"/></code>
         ///     </para>
         /// </summary>
+        /// <param name="employee">
+        ///      Represents the <see langword="object"/> that will be append to the list 
+        ///      to update the file content.
+        /// </param>
         /// <returns>
-        ///     <see cref="List{E}"/> of type <see cref="Employee"/>
+        ///     <see langword="true"/> 
+        ///     if <see langword="param"/> <paramref name="employee"/> is not <see langword="null"/> 
+        ///     and the content was append to the file successfully,
+        ///     otherwise <see langword="false"/>.
         /// </returns>
         public async Task<bool> Add(Employee? employee)
         {
