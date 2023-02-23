@@ -3,10 +3,10 @@
     /// <summary>
     ///     <see langword="public"/>
     ///     <see langword="class"/> 
-    ///     <see cref="SalaryRaise"/>, 
+    ///     <see cref="SalaryIncrease"/>, 
     ///     represents the salary increase data model.
     /// </summary>
-    public class SalaryRaise
+    public class SalaryIncrease
     {
         /// <summary>
         ///     <c><see langword="double"/> OldSalary</c>, 
