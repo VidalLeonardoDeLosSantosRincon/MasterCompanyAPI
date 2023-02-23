@@ -1,4 +1,5 @@
-﻿using MasterCompanyAPI.Models;
+﻿using MasterCompanyAPI.Interfaces;
+using MasterCompanyAPI.Models;
 using MasterCompanyAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,12 +14,13 @@ namespace MasterCompanyAPI.Controllers
             employeeRepo = new EmployeeRepository();
         }
 
-        [Route("{id:int}")]
+        [Route("{document}")]
         [HttpGet, ActionName("Get")]
-        public async Task<JsonResult> Get(int? id)
+        public async Task<JsonResult> Get(string? document)
         {
-            await Task.Delay(3000);
-            return new JsonResult(new { id });
+            Employee? employee = await employeeRepo.GetEmployeeByDocument(document);
+            object data =  (employee != null)? new { employee } : new { };
+            return new JsonResult(new { data });
         }
 
         [HttpGet, ActionName("Get")]
