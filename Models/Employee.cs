@@ -14,8 +14,7 @@ namespace MasterCompanyAPI.Models
     /// <see cref="IEmployee"/>
     /// </summary>
     public class Employee : IEmployee
-    {
-        public int Id { get; set; }
+    {  
         public string? Name { get; set; }
         public string? LastName { get; set; }
         public string? Document { get; set; }
@@ -23,6 +22,5 @@ namespace MasterCompanyAPI.Models
         public string? Gender { get; set; }
         public string? Position { get; set; }
         public string? StartDate { get; set; }
-        public int Status { get; set; }
     }
 }
