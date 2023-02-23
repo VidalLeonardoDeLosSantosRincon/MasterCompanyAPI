@@ -1,6 +1,7 @@
 ﻿using MasterCompanyAPI.Interfaces;
 using MasterCompanyAPI.Models;
 using MasterCompanyAPI.Repositories;
+using MasterCompanyAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
@@ -11,8 +12,11 @@ namespace MasterCompanyAPI.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+        private readonly EmployeeService employeeService;
         private readonly EmployeeRepository employeeRepo;
+
         public EmployeeController() {
+            employeeService = new EmployeeService();
             employeeRepo = new EmployeeRepository();
         }
 
@@ -52,6 +56,15 @@ namespace MasterCompanyAPI.Controllers
         {
             List<Employee> employees = await employeeRepo.GetNoDuplicatedEmployees();
             var data = new { total = employees.Count, employees };
+            return new JsonResult(new { data });
+        }
+
+        [Route("gender-percentages")]
+        [HttpGet, ActionName("GetGenderPercentages")]
+        [SwaggerOperation(Summary = "- Gets the gender percentages of employees")]
+        public async Task<JsonResult> GetGenderPercentages()
+        {
+            var data = await employeeService.GetGenderPercentages();
             return new JsonResult(new { data });
         }
 
