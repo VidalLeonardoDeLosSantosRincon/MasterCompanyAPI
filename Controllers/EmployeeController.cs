@@ -94,12 +94,13 @@ namespace MasterCompanyAPI.Controllers
             return new JsonResult(new { employee });
         }
 
-        [Route("delete/{id:int}")]
+        [Route("delete/{document}")]
         [HttpDelete, ActionName("Delete")]
-        public async Task<JsonResult> Delete(int? id)
+        [SwaggerOperation(Summary = "- Deletes an employee by his/her document")]
+        public async Task<JsonResult> Delete(string? document)
         {
-            await Task.Delay(3000);
-            return new JsonResult(new { id });
+            var data = await employeeService.Delete(document);
+            return new JsonResult(new { data });
         }
 
     }
