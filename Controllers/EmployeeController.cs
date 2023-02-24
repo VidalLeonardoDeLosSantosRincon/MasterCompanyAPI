@@ -86,12 +86,13 @@ namespace MasterCompanyAPI.Controllers
             return new JsonResult(new { data });
         }
 
-        [Route("update/{document}")]
-        [HttpPut, ActionName("Put")]
-        public async Task<JsonResult> Put([FromBody] Employee employee)
+        [Route("disable/{document}")]
+        [HttpPut, ActionName("Disable")]
+        [SwaggerOperation(Summary = "- Disables an employee by his/her document")]
+        public async Task<JsonResult> Disable(string? document)
         {
-            await Task.Delay(3000);
-            return new JsonResult(new { employee });
+            var data = await employeeService.Disable(document);
+            return new JsonResult(new { data });
         }
 
         [Route("delete/{document}")]
