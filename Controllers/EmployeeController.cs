@@ -20,6 +20,15 @@ namespace MasterCompanyAPI.Controllers
             employeeRepo = new EmployeeRepository();
         }
 
+        [Route("add")]
+        [HttpPost, ActionName("Post")]
+        [SwaggerOperation(Summary = "- Adds an employee")]
+        public async Task<JsonResult> Post([FromBody] Employee? employee)
+        {
+            var data = new { EmployeeAdded = await employeeRepo.AddEmployee(employee) };
+            return new JsonResult(new { data });
+        }
+
         [HttpGet, ActionName("Get")]
         [SwaggerOperation(Summary = "- Gets all employees (duplicated, enabled)")]
         public async Task<JsonResult> Get()
@@ -77,33 +86,6 @@ namespace MasterCompanyAPI.Controllers
             return new JsonResult(new { data });
         }
 
-        [Route("disabled")]
-        [HttpGet, ActionName("GetDisabled")]
-        [SwaggerOperation(Summary = "- Gets disabled employees")]
-        public async Task<JsonResult> GetDisabled()
-        {
-            var data = await employeeService.GetDisabled();
-            return new JsonResult(new { data });
-        }
-
-        [Route("deleted")]
-        [HttpGet, ActionName("GetDeleted")]
-        [SwaggerOperation(Summary = "- Gets deleted employees")]
-        public async Task<JsonResult> GetDeleted()
-        {
-            var data = await employeeService.GetDeleted();
-            return new JsonResult(new { data });
-        }
-
-        [Route("add")]
-        [HttpPost, ActionName("Post")]
-        [SwaggerOperation(Summary = "- Adds an employee")]
-        public async Task<JsonResult> Post([FromBody] Employee? employee)
-        {
-            var data = new { EmployeeAdded = await employeeRepo.AddEmployee(employee) };
-            return new JsonResult(new { data });
-        }
-
         [Route("disable/{document}")]
         [HttpPut, ActionName("Disable")]
         [SwaggerOperation(Summary = "- Disables an employee by his/her document")]
@@ -113,12 +95,30 @@ namespace MasterCompanyAPI.Controllers
             return new JsonResult(new { data });
         }
 
+        [Route("disabled")]
+        [HttpGet, ActionName("GetDisabled")]
+        [SwaggerOperation(Summary = "- Gets disabled employees")]
+        public async Task<JsonResult> GetDisabled()
+        {
+            var data = await employeeService.GetDisabled();
+            return new JsonResult(new { data });
+        }
+
         [Route("delete/{document}")]
         [HttpDelete, ActionName("Delete")]
         [SwaggerOperation(Summary = "- Deletes an employee by his/her document")]
         public async Task<JsonResult> Delete(string? document)
         {
             var data = await employeeService.Delete(document);
+            return new JsonResult(new { data });
+        }
+
+        [Route("deleted")]
+        [HttpGet, ActionName("GetDeleted")]
+        [SwaggerOperation(Summary = "- Gets deleted employees")]
+        public async Task<JsonResult> GetDeleted()
+        {
+            var data = await employeeService.GetDeleted();
             return new JsonResult(new { data });
         }
 
