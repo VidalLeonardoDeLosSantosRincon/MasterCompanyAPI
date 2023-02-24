@@ -82,6 +82,7 @@ namespace MasterCompanyAPI.DAOs
         ///         <code>- <see cref="Context{E}.AddContent"/></code>
         ///         <code>- <see cref="Context{E}.JsonArray"/></code>
         ///         <code>- <see cref="Context{E}.JsonToModelList"/></code>
+        ///         <code>- <see cref="Add"/></code>
         ///         <code>- <see cref="JsonSerializer.Serialize"/></code>
         ///     </para>
         /// </summary>
@@ -113,9 +114,15 @@ namespace MasterCompanyAPI.DAOs
             bool removed = employees.Remove(employee);
             if (!removed) return false;
 
+            /*////storing deleted employees//////*/
+            db = new("DeletedEmployees", ".txt"); //changing target file to DeletedEmployees.txt
+            await this.Add(employee); 
+            /*////////////////////////////////////*/
+
             string json = JsonSerializer.Serialize(employees);
             //Debug.WriteLine(json);
 
+            db = new("Employees", ".txt");//changing target file Employees.txt
             return await db.AddContent(json);
         }
     }
