@@ -77,6 +77,15 @@ namespace MasterCompanyAPI.Controllers
             return new JsonResult(new { data });
         }
 
+        [Route("disabled")]
+        [HttpGet, ActionName("GetDisabled")]
+        [SwaggerOperation(Summary = "- Gets disabled employees")]
+        public async Task<JsonResult> GetDisabled()
+        {
+            var data = await employeeService.GetDisabled();
+            return new JsonResult(new { data });
+        }
+
         [Route("deleted")]
         [HttpGet, ActionName("GetDeleted")]
         [SwaggerOperation(Summary = "- Gets deleted employees")]
