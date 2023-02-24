@@ -130,6 +130,55 @@ namespace MasterCompanyAPI.Services
         }
 
         /// <summary>
+        ///     Disables an employee by his/her document
+        ///     <para>Uses:
+        ///          <code>- <see cref="EmployeeRepository.DisableEmployee"/></code>
+        ///     </para>
+        /// </summary>
+        /// <param name="document">
+        ///      Represents the <see langword="property"/> Document of the <see cref="Employee"/> that will be removed from the list 
+        ///      to update the file content.
+        /// </param>
+        /// <returns>
+        ///     <para>
+        ///         An <see langword="object"/> that contains a property EmployeeDisabled that will be <see langword="true"/> 
+        ///         if <see langword="param"/> <paramref name="document"/> is not <see langword="null"/> and
+        ///     </para>
+        ///     <para>
+        ///         the content was moved from the file <see langword="Employees.txt"/> to <see langword="DisabledEmployees.txt"/> successfully,
+        ///         otherwise the  property EmployeeDisabled will be <see langword="false"/>.
+        ///     </para>
+        ///     <para>
+        ///         If <paramref name="document"/> <see langword="format"/> is not valid will be return a <see langword="object"/>
+        ///         with the <see langword="errors"/> info
+        ///     </para>
+        /// </returns>
+        public async Task<object> Disable(string? document)
+        {
+            List<string> errors = new();
+            if (document == null) errors.Add("Document Can't be null");
+
+            if (document != null)
+            {
+                document = document.Trim();
+                if (!document.All(Char.IsDigit)) errors.Add("Only digits allowed");
+                if (document == "") errors.Add("Can't be empty");
+                if (document.Length != 11) errors.Add($"Required length: 11, current document length: {document.Length}");
+            }
+
+            if (errors.Count > 0)
+            {
+                return new
+                {
+                    InvalidDocument = document,
+                    Constraints = errors
+                };
+            };
+
+            return new { EmployeeDisabled = await employeeRepo.DisableEmployee(document) };
+        }
+
+        /// <summary>
         ///     Deletes an employee by his/her document
         ///     <para>Uses:
         ///          <code>- <see cref="EmployeeRepository.DeteleEmployee"/></code>
