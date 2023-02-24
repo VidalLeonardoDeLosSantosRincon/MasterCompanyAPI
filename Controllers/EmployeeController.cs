@@ -79,7 +79,7 @@ namespace MasterCompanyAPI.Controllers
 
         [Route("add")]
         [HttpPost, ActionName("Post")]
-        [SwaggerOperation(Summary = "- Add an employee")]
+        [SwaggerOperation(Summary = "- Adds an employee")]
         public async Task<JsonResult> Post([FromBody] Employee? employee)
         {
             var data = new { EmployeeAdded = await employeeRepo.AddEmployee(employee) };
