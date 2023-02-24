@@ -20,6 +20,15 @@ namespace MasterCompanyAPI.Controllers
             employeeRepo = new EmployeeRepository();
         }
 
+        [HttpGet, ActionName("Get")]
+        [SwaggerOperation(Summary = "- Gets all employees (duplicated, enabled, disabled)")]
+        public async Task<JsonResult> Get()
+        {
+            List<Employee> employees = await employeeRepo.GetEmployees();
+            var data = new { total = employees.Count, employees };
+            return new JsonResult(new { data });
+        }
+
         [Route("{document}")]
         [HttpGet, ActionName("Get")]
         [SwaggerOperation(Summary = "- Gets a employee by his/her document")]
@@ -46,15 +55,6 @@ namespace MasterCompanyAPI.Controllers
         public async Task<JsonResult> GetSalaryRaise()
         {
             var data = await employeeService.GetSalaryRaise();
-            return new JsonResult(new { data });
-        }
-
-        [HttpGet, ActionName("Get")]
-        [SwaggerOperation(Summary = "- Gets all employees (duplicated, enabled, disabled)")]
-        public async Task<JsonResult> Get()
-        {
-            List<Employee> employees = await employeeRepo.GetEmployees();
-            var data = new { total = employees.Count, employees };
             return new JsonResult(new { data });
         }
 
@@ -86,7 +86,7 @@ namespace MasterCompanyAPI.Controllers
             return new JsonResult(new { data });
         }
 
-        [Route("update")]
+        [Route("update/{document}")]
         [HttpPut, ActionName("Put")]
         public async Task<JsonResult> Put([FromBody] Employee employee)
         {
