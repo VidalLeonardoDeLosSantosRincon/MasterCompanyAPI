@@ -40,6 +40,24 @@ namespace MasterCompanyAPI.DAOs
 
         /// <summary>
         ///     <c><see langword="async"/> method </c>
+        ///     <para>
+        ///         Returns a list of employees(deleted) 
+        ///     </para>
+        ///     <para>Uses:
+        ///         <code>- <see cref="GetAll()"/></code>
+        ///     </para>
+        /// </summary>
+        /// <returns>
+        ///     <see cref="List{E}"/> of type <see cref="Employee"/>
+        /// </returns>
+        public async Task<List<Employee>> GetDeleted()
+        {
+            db = new("DeletedEmployees", ".txt"); //changing target file to DeletedEmployees.txt
+            return await this.GetAll();
+        }
+
+        /// <summary>
+        ///     <c><see langword="async"/> method </c>
         ///     <para>Uses:
         ///         <code>- <see cref="Context{E}.AddContent"/></code>
         ///         <code>- <see cref="Context{E}.JsonArray"/></code>
