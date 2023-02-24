@@ -132,6 +132,46 @@ namespace MasterCompanyAPI.Services
         /// <summary>
         ///     <c><see langword="async"/> method </c>
         ///     <para>
+        ///         Returns a list of employees (disabled) 
+        ///     </para>
+        ///     <para>Uses:
+        ///         <code>- <see cref="EmployeeRepository.GetDisabledEmployees"/></code>
+        ///     </para>
+        /// </summary>
+        /// <returns>
+        ///     An <see langword="object"/> that contains the disabled employees.
+        /// </returns>
+        public async Task<object> GetDisabled()
+        {
+            List<Employee> employees = await employeeRepo.GetDisabledEmployees();
+            List<EmployeeDTO> deletedEmployees = new();
+            int index = 1;
+            int status = 0;
+
+            foreach (var employee in employees)
+            {
+                deletedEmployees
+                .Add(new()
+                {
+                    Id = index,
+                    Name = employee.Name,
+                    LastName = employee.LastName,
+                    Document = employee.Document,
+                    Salary = employee.Salary,
+                    Gender = employee.Gender,
+                    Position = employee.Position,
+                    StartDate = employee.StartDate,
+                    Status = status
+                });
+                index++;
+            }
+
+            return new { total = employees.Count, employees = deletedEmployees };
+        }
+
+        /// <summary>
+        ///     <c><see langword="async"/> method </c>
+        ///     <para>
         ///         Returns a list of employees (deleted) 
         ///     </para>
         ///     <para>Uses:
