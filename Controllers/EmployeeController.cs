@@ -21,7 +21,7 @@ namespace MasterCompanyAPI.Controllers
         }
 
         [HttpGet, ActionName("Get")]
-        [SwaggerOperation(Summary = "- Gets all employees (duplicated, enabled, disabled)")]
+        [SwaggerOperation(Summary = "- Gets all employees (duplicated, enabled)")]
         public async Task<JsonResult> Get()
         {
             List<Employee> employees = await employeeRepo.GetEmployees();
