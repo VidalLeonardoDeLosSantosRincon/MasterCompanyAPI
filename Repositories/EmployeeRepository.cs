@@ -118,6 +118,33 @@ namespace MasterCompanyAPI.Repositories
 
         /// <summary>
         ///     <c><see langword="async"/> method </c>,
+        ///     disables an employee by his/her document
+        ///     <para>Uses:
+        ///         <code>- <see cref="EmployeeDAO.Delete"/></code>
+        ///     </para>
+        /// </summary>
+        /// <param name="document">
+        ///      Represents the <see langword="property"/> Document of the <see cref="Employee"/> that will be removed from the list 
+        ///      to update the file content.
+        /// </param>
+        /// <returns>   
+        ///     <para>
+        ///         <see langword="true"/> if <see langword="param"/> <paramref name="document"/> is not 
+        ///         <see langword="null"/> and the content was moved from the file <see langword="Employees.txt"/>
+        ///     </para>
+        ///     <para>
+        ///         to <see langword="DisabledEmployees.txt"/> successfully,
+        ///         otherwise the  property EmployeeDisabled will be <see langword="false"/>.
+        ///     </para>
+        /// </returns>
+        public async Task<bool> DisableEmployee(string? document)
+        {
+            if (document == null) return false;
+            return await employeeDao.Disable(document);
+        }
+
+        /// <summary>
+        ///     <c><see langword="async"/> method </c>,
         ///     deletes an employee by his/her document
         ///     <para>Uses:
         ///         <code>- <see cref="EmployeeDAO.Delete"/></code>
