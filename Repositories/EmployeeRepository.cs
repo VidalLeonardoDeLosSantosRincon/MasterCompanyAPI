@@ -116,5 +116,27 @@ namespace MasterCompanyAPI.Repositories
             return await employeeDao.Add(employee);
         }
 
+        /// <summary>
+        ///     <c><see langword="async"/> method </c>,
+        ///     deletes an employee by his/her document
+        ///     <para>Uses:
+        ///         <code>- <see cref="EmployeeDAO.Delete"/></code>
+        ///     </para>
+        /// </summary>
+        /// <param name="document">
+        ///      Represents the <see langword="property"/> Document of the <see cref="Employee"/> that will be removed from the list 
+        ///      to update the file content.
+        /// </param>
+        /// <returns>
+        ///     <see langword="true"/> 
+        ///     if <see langword="param"/> <paramref name="document"/> is not <see langword="null"/> 
+        ///     and the content was removed from the file successfully,
+        ///     otherwise <see langword="false"/>.
+        /// </returns>
+        public async Task<bool> DeteleEmployee(string? document)
+        {
+            if (document == null) return false;
+            return await employeeDao.Delete(document);
+        }
     }
 }
