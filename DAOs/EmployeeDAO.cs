@@ -77,6 +77,58 @@ namespace MasterCompanyAPI.DAOs
 
         /// <summary>
         ///     <c><see langword="async"/> method </c>,
+        ///     disables an employee by his/her document
+        ///     <para>Uses:
+        ///         <code>- <see cref="Context{E}.AddContent"/></code>
+        ///         <code>- <see cref="Context{E}.JsonArray"/></code>
+        ///         <code>- <see cref="Context{E}.JsonToModelList"/></code>
+        ///         <code>- <see cref="Add"/></code>
+        ///         <code>- <see cref="JsonSerializer.Serialize"/></code>
+        ///     </para>
+        /// </summary>
+        /// <param name="document">
+        ///      Represents the <see langword="property"/> Document of the <see cref="Employee"/> that will be removed from the list 
+        ///      to update the file content.
+        /// </param>
+        /// <returns>
+        ///     <see langword="true"/> 
+        ///     if <see langword="param"/> <paramref name="document"/> is not <see langword="null"/>,
+        ///     
+        ///     and the content was removed from the file successfully,
+        ///     otherwise <see langword="false"/>.
+        /// </returns>
+        public async Task<bool> Disable(string? document)
+        {
+            if (document == null) return false;
+
+            List<Employee> employees = new();
+
+            var results = db.JsonToModelList(await db.JsonArray());
+            if (results == null) return false;
+
+            employees = results;
+            Employee? employee = employees.Where(x => x.Document != null && x.Document.Equals(document)).FirstOrDefault();
+
+            if (employee == null) return false;
+
+            bool removed = employees.Remove(employee);
+            if (!removed) return false;
+
+            
+            /*////storing disabled employees//////*/
+            db = new("DisabledEmployees", ".txt"); //changing target file to DisabledEmployees.txt
+            await this.Add(employee);
+            /*////////////////////////////////////*/
+
+            string json = JsonSerializer.Serialize(employees);
+            //Debug.WriteLine(json);
+
+            db = new("Employees", ".txt");//changing target file Employees.txt
+            return await db.AddContent(json);
+        }
+
+        /// <summary>
+        ///     <c><see langword="async"/> method </c>,
         ///     deletes an employee by his/her document
         ///     <para>Uses:
         ///         <code>- <see cref="Context{E}.AddContent"/></code>
@@ -116,7 +168,7 @@ namespace MasterCompanyAPI.DAOs
 
             /*////storing deleted employees//////*/
             db = new("DeletedEmployees", ".txt"); //changing target file to DeletedEmployees.txt
-            await this.Add(employee); 
+            await this.Add(employee);
             /*////////////////////////////////////*/
 
             string json = JsonSerializer.Serialize(employees);
