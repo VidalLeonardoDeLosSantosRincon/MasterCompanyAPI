@@ -94,6 +94,24 @@ namespace MasterCompanyAPI.Repositories
             return employees;
         }
 
+
+        /// <summary>
+        ///     <c><see langword="async"/> method </c>
+        ///     <para>
+        ///         Returns a list of employees (disabled) 
+        ///     </para>
+        ///     <para>Uses:
+        ///         <code>- <see cref="EmployeeDAO.GetDisabled"/></code>
+        ///     </para>
+        /// </summary>
+        /// <returns>
+        ///     <see cref="List{E}"/> of type <see cref="Employee"/>
+        /// </returns>
+        public async Task<List<Employee>> GetDisabledEmployees()
+        {
+            return await employeeDao.GetDisabled();
+        }
+
         /// <summary>
         ///     <c><see langword="async"/> method </c>
         ///     <para>
