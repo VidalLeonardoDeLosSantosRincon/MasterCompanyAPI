@@ -96,6 +96,23 @@ namespace MasterCompanyAPI.Repositories
 
         /// <summary>
         ///     <c><see langword="async"/> method </c>
+        ///     <para>
+        ///         Returns a list of employees (deleted) 
+        ///     </para>
+        ///     <para>Uses:
+        ///         <code>- <see cref="EmployeeDAO.GetDeleted"/></code>
+        ///     </para>
+        /// </summary>
+        /// <returns>
+        ///     <see cref="List{E}"/> of type <see cref="Employee"/>
+        /// </returns>
+        public async Task<List<Employee>> GetDeletedEmployees()
+        {
+            return await employeeDao.GetDeleted();
+        }
+
+        /// <summary>
+        ///     <c><see langword="async"/> method </c>
         ///     <para>Uses:
         ///         <code>- <see cref="EmployeeDAO.Add"/></code>
         ///     </para>
