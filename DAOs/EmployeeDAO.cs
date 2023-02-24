@@ -8,7 +8,7 @@ namespace MasterCompanyAPI.DAOs
 {
     public class EmployeeDAO
     {
-        private readonly Context<Employee> db;
+        private Context<Employee> db;
 
         public EmployeeDAO()
         {
