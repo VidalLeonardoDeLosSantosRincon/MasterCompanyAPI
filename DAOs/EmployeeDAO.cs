@@ -41,6 +41,24 @@ namespace MasterCompanyAPI.DAOs
         /// <summary>
         ///     <c><see langword="async"/> method </c>
         ///     <para>
+        ///         Returns a list of employees (disabled) 
+        ///     </para>
+        ///     <para>Uses:
+        ///         <code>- <see cref="GetAll()"/></code>
+        ///     </para>
+        /// </summary>
+        /// <returns>
+        ///     <see cref="List{E}"/> of type <see cref="Employee"/>
+        /// </returns>
+        public async Task<List<Employee>> GetDisabled()
+        {
+            db = new("DisabledEmployees", ".txt"); //changing target file to DisabledEmployees.txt
+            return await this.GetAll();
+        }
+
+        /// <summary>
+        ///     <c><see langword="async"/> method </c>
+        ///     <para>
         ///         Returns a list of employees(deleted) 
         ///     </para>
         ///     <para>Uses:
