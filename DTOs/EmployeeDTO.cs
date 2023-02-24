@@ -19,15 +19,19 @@ namespace MasterCompanyAPI.DTOs
         public string? StartDate { get; set; }
 
         /// <summary>
-        /// <c><see langword="int"/> Status</c>, 
-        /// represents the <see cref="Employee"/> Status <c>(Range [0, 1])</c>
+        ///     <c><see langword="int"/> Status</c>, 
+        ///     represents the <see cref="Employee"/> Status <c>(Range [0, 2])</c>
         /// <para>
-        ///  If <c>Status</c> equals to <c><see langword="0"/></c>
-        ///  the employee is disabled
+        ///     If <c>Status</c> equals to <c><see langword="0"/></c>
+        ///     the employee is disabled
         /// </para>
         /// <para>
-        ///  If <c>Status</c> equals to <c><see langword="1"/></c>
-        ///  the employee is enabled
+        ///     If <c>Status</c> equals to <c><see langword="1"/></c>
+        ///     the employee is enabled
+        /// </para>
+        ///  <para>
+        ///     If <c>Status</c> equals to <c><see langword="2"/></c>
+        ///     the employee is deleted
         /// </para>
         /// </summary>
         public int Status { get; set; }
